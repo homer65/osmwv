@@ -2,6 +2,12 @@ package osm.viewer;
 import java.io.*;
 import core.*;
 import java.util.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 public class SimpleGPXTrack implements GPXTrack
 {
 	private Util util = Factory.getUtil();
@@ -58,9 +64,46 @@ public class SimpleGPXTrack implements GPXTrack
 		//
 	}
 	@Override
-	public void readFromFile() 
+	public void readFromFile(File file) 
 	{
-		Protokol.write("SimpleGPXTrack:readFromFile:not implemented");		
+		Document doc = null;
+		try
+		{
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			doc = dBuilder.parse(file);
+			doc.getDocumentElement().normalize();	
+			Element root = doc.getDocumentElement();
+			// System.out.println(root.getNodeName());
+			explore(root);
+		}
+		catch (Exception e)
+		{
+			System.out.println("SimpleGPXTrack:readFromFile:Exception:");
+			System.out.println(e.toString());
+		}
+	}
+	public void explore(Element element)
+	{
+		NodeList nodeList = element.getChildNodes();
+		for (int i=0;i<nodeList.getLength();i++)
+		{
+			Node node = nodeList.item(i);
+			if (node.getNodeType() == Node.ELEMENT_NODE)
+			{
+				Element nextElement = (Element) node;
+				String elementName = node.getNodeName();
+				if (elementName.equals("trkpt"))
+				{
+					String lat = nextElement.getAttribute("lat");
+					String lon = nextElement.getAttribute("lon");
+					Double dlat = StringUtil.toDouble(lat);
+					Double dlon = StringUtil.toDouble(lon);
+					addPoint(dlat,dlon);
+				}
+				explore(nextElement);
+			}
+		}
 	}
 	@Override
 	public void writeToFile() 

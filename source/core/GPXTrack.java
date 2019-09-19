@@ -1,4 +1,5 @@
 package core;
+import java.io.File;
 import java.util.*;
 public interface GPXTrack 
 {
@@ -7,6 +8,6 @@ public interface GPXTrack
 	public void addPoint(double lat,double lon);
 	public void removeNearestPoint(double lat,double lon);
 	public void writeToFile();
-	public void readFromFile();
+	public void readFromFile(File file);
 	public ArrayList<Point> getPoints();
 }

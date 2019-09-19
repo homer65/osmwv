@@ -19,4 +19,5 @@ public interface Icon
 	public void writeToFile(File file);
 	public void readFromFile(File file);
 	public void umrande(Color c);
+	public void paintGPX(GPXTrack track,Koordinate koordinate);
 }

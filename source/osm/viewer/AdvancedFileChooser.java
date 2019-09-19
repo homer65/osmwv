@@ -45,4 +45,16 @@ public class AdvancedFileChooser implements FileChooser
 		}
 		return erg;
 	}
+	@Override
+	public File getGPXFile() 
+	{
+		File erg = null;
+		JFileChooser fc = new JFileChooser();
+		int rc = fc.showOpenDialog(null);
+		if (rc == JFileChooser.APPROVE_OPTION)
+		{
+			erg = fc.getSelectedFile();
+		}
+		return erg;
+	}
 }

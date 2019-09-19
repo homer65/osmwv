@@ -62,11 +62,15 @@ public class SimpleKoordinate implements Koordinate
 	@Override
 	public void set(double lat, double lon, int zoom) 
 	{
-		int xtile = (int)Math.floor( (lon + 180) / 360 * (1<<zoom) ) ;
-		int ytile = (int)Math.floor( (1 - Math.log(Math.tan(Math.toRadians(lat)) + 1 / Math.cos(Math.toRadians(lat))) / Math.PI) / 2 * (1<<zoom) ) ;
+		double xtile = (int)Math.floor( (lon + 180) / 360 * (1<<zoom) ) ;
+		double ytile = (int)Math.floor( (1 - Math.log(Math.tan(Math.toRadians(lat)) + 1 / Math.cos(Math.toRadians(lat))) / Math.PI) / 2 * (1<<zoom) ) ;
 		z = zoom;
-		x = xtile;
-		y = ytile;
+		x = (int) xtile;
+		y = (int) ytile;
+		xtile -= (double) x;
+		ytile -= (double) y;
+		p = (int) (256.0 * xtile);
+		q = (int) (256.0 * ytile);
 	}
 	@Override
 	public double getLat() 

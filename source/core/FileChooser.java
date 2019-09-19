@@ -4,4 +4,5 @@ public interface FileChooser
 {
 	public File getReadFile();
 	public File getWriteFile();
+	public File getGPXFile();
 }

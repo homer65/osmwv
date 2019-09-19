@@ -34,6 +34,7 @@ public class MainFrame extends Menu implements PixelListener
 	private JMenuItem m24 = new JMenuItem("SaveXMLData");
 	private JMenuItem m31 = new JMenuItem("Open GPX Track");
 	private JMenuItem m32 = new JMenuItem("Close GPX Track");
+	private JMenuItem m33 = new JMenuItem("Load GPX Track");
 	private JMenuItem m41 = new JMenuItem("Statistik...");
 	private JMenuItem m42 = new JMenuItem("Build Cache");
 	private JMenuItem m51 = new JMenuItem("Position to Border");
@@ -70,6 +71,7 @@ public class MainFrame extends Menu implements PixelListener
 		m24.addActionListener(this);
 		m31.addActionListener(this);
 		m32.addActionListener(this);
+		m33.addActionListener(this);
 		m41.addActionListener(this);
 		m42.addActionListener(this);
 		m51.addActionListener(this);
@@ -85,6 +87,7 @@ public class MainFrame extends Menu implements PixelListener
 		m2.add(m24);
 		m3.add(m31);
 		m3.add(m32);
+		m3.add(m33);
 		m4.add(m41);
 		m4.add(m42);
 		m5.add(m51);
@@ -144,6 +147,7 @@ public class MainFrame extends Menu implements PixelListener
 		icon9.build9(icon00,icon01,icon02,icon10,icon11,icon12,icon20,icon21,icon22);
 		icon = icon9.clip(koordinate.getP(),koordinate.getQ());
 		icon = icon9.mittelKreuz(icon);
+		if (track != null) icon.paintGPX(track,koordinate);
 		ip.setIcon(icon);
 		this.validate();
 		this.repaint();
@@ -268,6 +272,17 @@ public class MainFrame extends Menu implements PixelListener
 				track.writeToFile();
 				track = null;
 			}
+		}
+		if (quelle == m33) // Load GPX Track
+		{
+			FileChooser fc = Factory.getFileChooser();
+			File file = fc.getGPXFile();
+			if (file != null)
+			{
+				track = Factory.getGPXTrack();
+				track.readFromFile(file);
+				showIcon();
+			}			
 		}
 		if (quelle == butt1) // Zoom +
 		{

@@ -1,11 +1,12 @@
 package osm.viewer;
 import java.net.*;
+import java.util.ArrayList;
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
-
 import javax.imageio.ImageIO;
 import core.*;
+import core.Point;
 public class SimpleIcon implements Icon
 {
 	private int width = 256;
@@ -240,7 +241,9 @@ public class SimpleIcon implements Icon
 		if (x >= 0 && y >= 0 && x < max && y < max)
 		{
 			BufferedImage im = null;
-			String sUrl = "http://tile.openstreetmap.org/" + z + "/" + y + "/" + x + ".png";
+			//String sUrl = "http://tile.openstreetmap.org/" + z + "/" + y + "/" + x + ".png";
+			String sUrl = "https://tile.thunderforest.com/cycle/" + z + "/" + y + "/" + x + ".png";
+			sUrl += "?apikey=2f5cfc26c3f247338c829d8e9d1e637e";
 			try
 			{
 				URL url = new URL(sUrl);
@@ -291,7 +294,10 @@ public class SimpleIcon implements Icon
 		int x = p.getX();
 		int y = p.getY();
 		Color c = p.getColor();
-		pixel[x][y] = c.getRGB();
+		if (x < 512 && y < 512)
+		{
+			pixel[x][y] = c.getRGB();
+		}
 	}
 	public void setSize(int width, int height) 
 	{
@@ -360,5 +366,39 @@ public class SimpleIcon implements Icon
 				}
 			}
 		}
+	}
+	@Override
+	public void paintGPX(GPXTrack track,Koordinate koordinate) 
+	{
+		ArrayList<Point> points = track.getPoints();
+		for (int i=0;i<points.size();i++)
+		{
+			Point point = points.get(i);
+			paintPoint(point,koordinate);
+		}
+	}
+	public void paintPoint(Point point,Koordinate koordinate)
+	{
+		Koordinate k2 = Factory.getKoordinate();
+		k2.set(point.getLat(),point.getLon(),koordinate.getZ());
+		int x = koordinate.getX();
+		int y = koordinate.getY();
+		int x2 = k2.getX();
+		int y2 = k2.getY();
+		int dx = x2 - x;
+		int dy = y2 - y;
+		int p = koordinate.getP();
+		int q = koordinate.getQ();
+		int p2 = k2.getP();
+		int q2 = k2.getQ();
+		int dp = p2 - p;
+		int dq = q2 - q;
+		dp += 256 * dx;
+		dq += 256 * dy;
+		Pixel pixel = Factory.getPixel();
+		pixel.setX(dp);
+		pixel.setY(dq);
+		pixel.setColor(Color.RED);
+		setPixel(pixel);
 	}
 }
