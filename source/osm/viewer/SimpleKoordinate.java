@@ -98,12 +98,14 @@ public class SimpleKoordinate implements Koordinate
 	}
 	public void calculateLatLon()
 	{
-		double fp = (double) p;
-		double fq = (double) q;
-		double fx = (double) y;
-		double fy = (double) x;
-		fx = fx + 1 + (fp / 256);
-		fy = fy + 1 + (fq / 256);
+		double fx = (double) x;
+		fx += 1.5;
+		double fy = (double) y;
+		fy += 1.5;
+		double dp = (double) p;
+		double dq = (double) q;
+		fx += dq / 256.0;
+		fy += dp / 256.0;
 		double fz = 1;
 		double pi = Math.PI;
 		for (int i=0;i<z;i++)
@@ -123,8 +125,8 @@ public class SimpleKoordinate implements Koordinate
 		double fy = (double) (x);
 		//fx = fx + 1 + (fp / 256);
 		//fy = fy + 1 + (fq / 256);
-		fx = fx + (fp / 256);
-		fy = fy + (fq / 256);
+		fx = fx + (fq / 256);
+		fy = fy + (fp / 256);
 		double fz = 1;
 		double pi = Math.PI;
 		for (int i=0;i<z;i++)

@@ -32,10 +32,12 @@ public class SimpleInfoPanel extends InfoPanel
 		double dy = (double)y;
 		double dp = (double)p;
 		double dq = (double)q;
-		dx = dx + 1 + (dp / 256);
-		dy = dy + 1 + (dq / 256);
+		dx = dx + 1.5 + (dp / 256.0);
+		dy = dy + 1.5 + (dq / 256.0);
 		labx = new JLabel(" x:" + util.getRound2(dx));
 		laby = new JLabel(" y:" + util.getRound2(dy));
+		//labx = new JLabel(" x:" + x + " p:" + p);
+		//laby = new JLabel(" y:" + y + " q:" + q);
 		labz = new JLabel("Zoom:" + z);
 		lablat = new JLabel("lat:" + util.getRound4(lat));
 		lablon = new JLabel("lon:" + util.getRound4(lon));

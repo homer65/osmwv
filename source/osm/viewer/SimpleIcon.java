@@ -82,6 +82,21 @@ public class SimpleIcon implements Icon
 		}
 		return erg;
 	}
+	public Icon clip16(int p,int q)
+	{
+		SimpleIcon erg = new SimpleIcon();
+		erg.width = 768;
+		erg.height = 768;
+		erg.pixel = new int[768][768];
+		for (int i=0;i<768;i++)
+		{
+			for (int j=0;j<768;j++)
+			{
+				erg.pixel[i][j] = this.pixel[i+p][j+q];
+			}
+		}
+		return erg;
+	}
 	public Icon mittelKreuz(Icon icon)
 	{
 		Color rot = new Color(255,0,0);
@@ -104,6 +119,36 @@ public class SimpleIcon implements Icon
 				if (j==256) 
 				{
 					if (i>231 && i<281)
+					{
+						erg.pixel[i][j] = rot.getRGB();
+					}
+				}
+			}
+		}
+		return erg;
+	}
+	public Icon mittel16Kreuz(Icon icon)
+	{
+		Color rot = new Color(255,0,0);
+		SimpleIcon erg = new SimpleIcon();
+		erg.width = 768;
+		erg.height = 768;
+		erg.pixel = new int[768][768];
+		for (int i=0;i<768;i++)
+		{
+			for (int j=0;j<768;j++)
+			{
+				erg.pixel[i][j] = icon.getPixel(i,j).getColor().getRGB();
+				if (i==384)
+				{
+					if (j>359 && j<409)
+					{
+						erg.pixel[i][j] = rot.getRGB();
+					}
+				}
+				if (j==384) 
+				{
+					if (i>359 && i<409)
 					{
 						erg.pixel[i][j] = rot.getRGB();
 					}
@@ -178,6 +223,124 @@ public class SimpleIcon implements Icon
 			for (int j=0;j<256;j++)
 			{
 				pixel[i+512][j+512] = i22.getPixel(i,j).getColor().getRGB();
+			}
+		}
+	}
+	public void build16(Icon i00,Icon i01,Icon i02,Icon i03,Icon i10,Icon i11,Icon i12,Icon i13,Icon i20,Icon i21,Icon i22,Icon i23,Icon i30,Icon i31,Icon i32,Icon i33)
+	{
+		width = 4 * 256;
+		height = 4 * 256;
+		pixel = new int[width][height];
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i][j] = i00.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i][j+256] = i10.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i][j+512] = i20.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i][j+768] = i30.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+256][j] = i01.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+256][j+256] = i11.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+256][j+512] = i21.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+256][j+768] = i31.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+512][j] = i02.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+512][j+256] = i12.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+512][j+512] = i22.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+512][j+768] = i32.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+768][j] = i03.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+768][j+256] = i13.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+768][j+512] = i23.getPixel(i,j).getColor().getRGB();
+			}
+		}
+		for (int i=0;i<256;i++)
+		{
+			for (int j=0;j<256;j++)
+			{
+				pixel[i+768][j+768] = i33.getPixel(i,j).getColor().getRGB();
 			}
 		}
 	}
@@ -294,7 +457,7 @@ public class SimpleIcon implements Icon
 		int x = p.getX();
 		int y = p.getY();
 		Color c = p.getColor();
-		if (x < 512 && y < 512)
+		if (x < 768 && y < 768)
 		{
 			pixel[x][y] = c.getRGB();
 		}
