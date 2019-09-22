@@ -160,4 +160,23 @@ public class SimpleGPXTrack implements GPXTrack
 		String erg = "<wpt lat=\"" + slat + "\" lon=\"" + slon + "\">";
 		return erg;
 	}
+	@Override
+	public void buildKoordinate(Koordinate koordinate) 
+	{
+		int n = punkte.size();
+		double lat = 0.0;
+		double lon = 0.0;
+		for (int i=0;i<punkte.size();i++)
+		{
+			Point punkt = punkte.get(i);
+			lat += punkt.getLat();
+			lon += punkt.getLon();
+		}
+		double dn = (double) n;
+		lat = lat / dn;
+		lon = lon / dn;
+		System.out.println("SimpleGPXTrack:buildKoordinate:");
+		System.out.println(lat + ":" + lon);
+		koordinate.set(lat,lon,11);
+	}
 }

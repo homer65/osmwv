@@ -62,15 +62,24 @@ public class SimpleKoordinate implements Koordinate
 	@Override
 	public void set(double lat, double lon, int zoom) 
 	{
-		double xtile = (int)Math.floor( (lon + 180) / 360 * (1<<zoom) ) ;
-		double ytile = (int)Math.floor( (1 - Math.log(Math.tan(Math.toRadians(lat)) + 1 / Math.cos(Math.toRadians(lat))) / Math.PI) / 2 * (1<<zoom) ) ;
+		double fz = 1.0;
+		for (int i=0;i<zoom;i++)
+		{
+			fz = 2.0 * fz;
+		}
+		double ytile = (int)Math.floor( (lon + 180) / 360 * fz ) ;
+		double xtile = (int)Math.floor( (1 - Math.log(Math.tan(Math.toRadians(lat)) + 1 / Math.cos(Math.toRadians(lat))) / Math.PI) / 2 * fz ) ;
 		z = zoom;
 		x = (int) xtile;
 		y = (int) ytile;
 		xtile -= (double) x;
 		ytile -= (double) y;
-		p = (int) (256.0 * xtile);
-		q = (int) (256.0 * ytile);
+		q = (int) (256.0 * xtile);
+		p = (int) (256.0 * ytile);
+		x--;
+		y--;
+		System.out.println("SimpleKoordinate:set:");
+		System.out.println(x + ":" + y + "::" + q + ":" + p);
 	}
 	@Override
 	public double getLat() 
@@ -98,6 +107,8 @@ public class SimpleKoordinate implements Koordinate
 	}
 	public void calculateLatLon()
 	{
+		//System.out.println("SimpleKoordinate:calculateLatLon:");
+		//System.out.println(z + ":" + x + ":" + y + ":" + q + ":" + p);
 		double fx = (double) x;
 		fx += 1.5;
 		double fy = (double) y;
@@ -106,16 +117,21 @@ public class SimpleKoordinate implements Koordinate
 		double dq = (double) q;
 		fx += dq / 256.0;
 		fy += dp / 256.0;
-		double fz = 1;
+		double f = fx;
+		fx = fy;
+		fy = f;
+		//System.out.println(z + ":" + fx + ":" + fy);
+		double fz = 1.0;
 		double pi = Math.PI;
 		for (int i=0;i<z;i++)
 		{
-			fz = 2 * fz;
+			fz = 2.0 * fz;
 		}
-		lon = 360 * ((fx)/fz) - 180;
-		lat = pi - 2 * pi * (fy)/fz;
+		lon = 360.0 * ((fx)/fz) - 180.0;
+		lat = pi - 2.0 * pi * (fy)/fz;
 		lat = Math.sinh(lat);
-		lat = Math.atan(lat) * 180 / pi;
+		lat = Math.atan(lat) * 180.0 / pi;
+		//System.out.println(lat + ":" + lon);
 	}
 	public void calculateTrueLatLon()
 	{

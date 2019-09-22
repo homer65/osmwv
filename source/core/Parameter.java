@@ -1,7 +1,7 @@
 package core;
 public class Parameter 
 {
-	public static String version = "Version 0.23 21.09.2019";
+	public static String version = "Version 0.24 22.09.2019";
 	public static double delta = 0.009;
 	public static String cachedir = "/";
 	public static long getKachel = 0;

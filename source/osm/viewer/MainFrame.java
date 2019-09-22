@@ -343,6 +343,7 @@ public class MainFrame extends Menu implements PixelListener
 			{
 				track = Factory.getGPXTrack();
 				track.readFromFile(file);
+				if (track != null) track.buildKoordinate(koordinate);
 				showIcon();
 			}			
 		}

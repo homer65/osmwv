@@ -9,5 +9,6 @@ public interface GPXTrack
 	public void removeNearestPoint(double lat,double lon);
 	public void writeToFile();
 	public void readFromFile(File file);
+	public void buildKoordinate(Koordinate koordinate);
 	public ArrayList<Point> getPoints();
 }
