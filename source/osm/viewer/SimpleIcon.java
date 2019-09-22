@@ -459,7 +459,10 @@ public class SimpleIcon implements Icon
 		Color c = p.getColor();
 		if (x < 768 && y < 768)
 		{
-			pixel[x][y] = c.getRGB();
+			if (x >= 0 && y >= 0)
+			{
+				pixel[x][y] = c.getRGB();
+			}
 		}
 	}
 	public void setSize(int width, int height) 
