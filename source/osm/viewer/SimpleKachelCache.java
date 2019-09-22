@@ -55,5 +55,13 @@ public class SimpleKachelCache implements KachelCache
 	{
 		String erg = "no Statistik available";
 		return erg;
+	}
+	@Override
+	public void resetRAM() 
+	{
+		for (int i=0;i<size;i++)
+		{
+			cache[i] = Factory.getKachel();
+		}		
 	}	
 }

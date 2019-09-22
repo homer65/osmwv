@@ -79,5 +79,13 @@ public class FileKachelCache implements KachelCache
 		      erg += "Kachel from RAM   : " + Parameter.getKachelFromRam + "\n";
 		      erg += "Kachel from Server: " + Parameter.getKachelFromServer + "\n";
 		return erg;
+	}
+	@Override
+	public void resetRAM() 
+	{
+		for (int i=0;i<size;i++)
+		{
+			cache[i] = Factory.getKachel();
+		}		
 	}	
 }

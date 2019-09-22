@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.util.*;
 import java.io.*;
-import java.net.*;
+//import java.net.*;
 public class MainFrame extends Menu implements PixelListener
 {
 	private static final long serialVersionUID = 0;
@@ -46,7 +46,7 @@ public class MainFrame extends Menu implements PixelListener
 	private Persistenz persistenz = Factory.getPersistenz();
 	private Koordinate koordinate = persistenz.getStartKoordinate();
 	private GPXTrack track = null;
-	private Util util = Factory.getUtil();
+	//private Util util = Factory.getUtil();
 	public MainFrame() 
 	{
 		super("http://www.myoggradio.org");
@@ -341,6 +341,7 @@ public class MainFrame extends Menu implements PixelListener
 			File file = fc.getGPXFile();
 			if (file != null)
 			{
+				cache.resetRAM();
 				track = Factory.getGPXTrack();
 				track.readFromFile(file);
 				if (track != null) track.buildKoordinate(koordinate);

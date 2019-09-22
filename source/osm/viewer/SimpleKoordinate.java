@@ -78,8 +78,8 @@ public class SimpleKoordinate implements Koordinate
 		p = (int) (256.0 * ytile);
 		x--;
 		y--;
-		System.out.println("SimpleKoordinate:set:");
-		System.out.println(x + ":" + y + "::" + q + ":" + p);
+		//System.out.println("SimpleKoordinate:set:");
+		//System.out.println(x + ":" + y + "::" + q + ":" + p);
 	}
 	@Override
 	public double getLat() 

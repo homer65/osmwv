@@ -26,6 +26,7 @@ public class SimpleGPXTrack implements GPXTrack
 	public void init() 
 	{
 		punkte = new ArrayList<Point>();
+		satz = new ArrayList<String>();
 	}
 	@Override
 	public void removeNearestPoint(double lat, double lon) 
@@ -66,6 +67,7 @@ public class SimpleGPXTrack implements GPXTrack
 	@Override
 	public void readFromFile(File file) 
 	{
+		init();
 		Document doc = null;
 		try
 		{
