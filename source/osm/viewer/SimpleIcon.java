@@ -406,7 +406,7 @@ public class SimpleIcon implements Icon
 			BufferedImage im = null;
 			//String sUrl = "http://tile.openstreetmap.org/" + z + "/" + y + "/" + x + ".png";
 			String sUrl = "https://tile.thunderforest.com/cycle/" + z + "/" + y + "/" + x + ".png";
-			sUrl += "?apikey=2f5cfc26c3f247338c829d8e9d1e637e";
+			sUrl += "?apikey=" + Parameter.apikey;
 			try
 			{
 				URL url = new URL(sUrl);
