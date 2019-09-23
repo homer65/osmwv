@@ -38,7 +38,7 @@ public class SimpleXMLData implements XMLData
 		if (mala.length() > 6) mala = mala.substring(0,6); 
 		if (milo.length() > 6) milo = milo.substring(0,6); 
 		if (malo.length() > 6) malo = malo.substring(0,6); 
-		String sUrl = "http://api.openstreetmap.org/api/0.6/map?bbox=";
+		String sUrl = "https://api.openstreetmap.org/api/0.6/map?bbox=";
 		sUrl+=milo + "," + mila + "," + malo + "," + mala;
 		Protokol.write("SimpleXMLData:getXML:API URL:");
 		Protokol.write(sUrl);
