@@ -68,6 +68,10 @@ public class SimpleXMLToWebsite implements XMLToWebsite
 			if (aname.equals("k")) k = avalue;
 			if (aname.equals("v")) v = avalue;
 		}
+		if (k.toLowerCase().equals("contact:website"))
+		{
+			erg.add(v);
+		}
 		if (k.toLowerCase().equals("website"))
 		{
 			erg.add(v);
