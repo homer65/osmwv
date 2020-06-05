@@ -404,9 +404,10 @@ public class SimpleIcon implements Icon
 		if (x >= 0 && y >= 0 && x < max && y < max)
 		{
 			BufferedImage im = null;
-			//String sUrl = "http://tile.openstreetmap.org/" + z + "/" + y + "/" + x + ".png";
-			String sUrl = "https://tile.thunderforest.com/cycle/" + z + "/" + y + "/" + x + ".png";
-			sUrl += "?apikey=" + Parameter.apikey;
+			System.setProperty("http.agent","OSMWV 0.25");
+			String sUrl = "https://a.tile.openstreetmap.org/" + z + "/" + y + "/" + x + ".png";
+			//String sUrl = "https://tile.thunderforest.com/cycle/" + z + "/" + y + "/" + x + ".png";
+			//sUrl += "?apikey=" + Parameter.apikey;
 			try
 			{
 				URL url = new URL(sUrl);
